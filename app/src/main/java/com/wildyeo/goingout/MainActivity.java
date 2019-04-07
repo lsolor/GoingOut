@@ -1,4 +1,4 @@
-package com.example.goingout;
+package com.wildyeo.goingout;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

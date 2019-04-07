@@ -1,4 +1,4 @@
-package com.example.goingout;
+package com.wildyeo.goingout;
 
 import org.junit.Test;
 

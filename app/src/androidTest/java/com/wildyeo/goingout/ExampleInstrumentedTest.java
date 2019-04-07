@@ -1,4 +1,4 @@
-package com.example.goingout;
+package com.wildyeo.goingout;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
