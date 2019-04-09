@@ -3,6 +3,7 @@ package com.wildyeo.goingout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "foo@example.com:hello", "bar@example.com:world","lsolor94@gmail.com:thunder"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -89,9 +90,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 attemptLogin();
             }
         });
+        //my attempt at creating register page
+        Button mEmailRegisterButton = (Button) findViewById(R.id.email_register);
+        mEmailRegisterButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jumpToRegisterPage();
+            }
+        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    private void jumpToRegisterPage() {
+        Intent jump = new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(jump);
     }
 
     private void populateAutoComplete() {
