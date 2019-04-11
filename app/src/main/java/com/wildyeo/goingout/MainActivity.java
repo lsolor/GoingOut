@@ -25,18 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser == null){//user is not authenticated need to send to loginActivity
+       /* if(currentUser == null){//user is not authenticated need to send to loginActivity
             sendUserToLoginActivity();
         }
-
+*/
 
 
     }
 
-    private void sendUserToLoginActivity() {
+    /*private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
-    }
+    }*/
 }
