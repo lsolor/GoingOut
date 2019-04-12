@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         //mAuth = FirebaseAuth.getInstance();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
+        View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
