@@ -14,23 +14,25 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     private FirebaseAuth mAuth;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    private RecyclerView recyclerView;
+    private RecyclerView postList;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //mAuth = FirebaseAuth.getInstance();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        View navView = navigationView.inflateHeaderView(R.layout.navigation_header);
+        View navView = navigationView.inflateHeaderView(R.layout.navigation_header); //add in header with profile pic
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -44,8 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void UserMenuSelector(MenuItem menuItem) {
-        switch(menuItem.getItemId()){
+    private void UserMenuSelector(MenuItem menuItem)
+    {
+
+        switch(menuItem.getItemId())
+        {
             case R.id.nav_profile:
                 Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
                 break;
