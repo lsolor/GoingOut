@@ -14,7 +14,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     //UI references
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView;
     private EditText mPassword1;
     private EditText mPassword2;
 
@@ -24,12 +24,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        mPassword1 = (EditText) findViewById(R.id.confirm_password_1);
-        mPassword1 = (EditText) findViewById(R.id.confirm_password_2);
+        mEmailView = (EditText) findViewById(R.id.register_email);
+        mPassword1 = (EditText) findViewById(R.id.register_password);
+        mPassword1 = (EditText) findViewById(R.id.register_confirm_password);
 
 
-        Button mRegisterButton = (Button) findViewById(R.id.create_account_button);
+        Button mRegisterButton = (Button) findViewById(R.id.register_create_account_button);
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

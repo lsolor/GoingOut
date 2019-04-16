@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private NavigationView navigationView;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
     private Toolbar mToolbar;
@@ -38,7 +40,14 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle("Home");
 
         //mAuth = FirebaseAuth.getInstance();
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open,R.string.drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header); //add in header with profile pic
 
@@ -52,6 +61,20 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void UserMenuSelector(MenuItem menuItem)

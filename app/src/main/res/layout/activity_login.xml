@@ -1,9 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/register"
     tools:context=".LoginActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/login_icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_height="150dp" />
+
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_icon"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/inputs"
+        android:drawableLeft="@drawable/email"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_email"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/inputs"
+        android:drawableLeft="@drawable/password"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_password"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button"
+        android:padding="15dp"
+        android:text="Login"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/login_create_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
+        android:layout_marginTop="5dp"
+        android:text="Create Account"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/button"
+        android:padding="15dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_create_account_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="or Login with"
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/textView"
+        >
+
+        <ImageView
+            android:id="@+id/facebook_sign_in_button"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/facebook"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="8dp"/>
+        <ImageView
+            android:id="@+id/twitter_sign_in_button"
+            android:layout_width="125dp"
+            android:layout_height="105dp"
+            android:src="@drawable/twitter"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+            android:id="@+id/google_sign_in_button"
+            android:layout_width="90dp"
+            android:layout_height="75dp"
+            android:src="@drawable/google"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

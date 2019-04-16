@@ -58,12 +58,12 @@
         android:padding="10dp" />
 
     <Button
-        android:id="@+id/register_create_account"
+        android:id="@+id/register_create_account_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_confirm_password"
         android:layout_marginTop="5dp"
-        android:background="@drawable/buttton"
+        android:background="@drawable/button"
         android:padding="15dp"
         android:text="Create Account"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
