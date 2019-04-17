@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Toast.makeText(this, "Firebase connected", Toast.LENGTH_SHORT).show();
         //Setting up toolbar
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
 
-        //mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open,R.string.drawer_close);
@@ -61,6 +61,27 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){//user is not authenticated need to send to loginActivity
+            Toast.makeText(this, "help", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "ughhh", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void SendUserToLoginActivity() {
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        finish();
     }
 
 
@@ -110,24 +131,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-
-       /* if(currentUser == null){//user is not authenticated need to send to loginActivity
-            sendUserToLoginActivity();
-        }
-*/
 
 
-    }
 
-    /*private void sendUserToLoginActivity() {
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(loginIntent);
-        finish();
-    }*/
 }
