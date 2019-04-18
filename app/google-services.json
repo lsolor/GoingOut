@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "774972194420",
+    "firebase_url": "https://goingout-d5b67.firebaseio.com",
+    "project_id": "goingout-d5b67",
+    "storage_bucket": "goingout-d5b67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774972194420:android:fbc5cef3fed855d8",
+        "android_client_info": {
+          "package_name": "com.wildyeo.goingout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774972194420-grtqgsu1vb3fcjc130l4g8i0gs675gim.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wildyeo.goingout",
+            "certificate_hash": "f3eb1c5895ebd2c45eea7f390f495b902846f1e1"
+          }
+        },
+        {
+          "client_id": "774972194420-b705hme2kakoq927e284l1upalaq7i17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1vh91MX_lJwy1wRB-6NfIt4weSPqYBWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774972194420-b705hme2kakoq927e284l1upalaq7i17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
