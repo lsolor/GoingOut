@@ -13,13 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.FirebaseApp;
+
 
 public class MainActivity extends AppCompatActivity
 {
 
-    private FirebaseAuth mAuth;
+   // private FirebaseAuth mAuth;
+    //private FirebaseApp mApp;
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private DrawerLayout drawerLayout;
@@ -33,13 +34,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //mApp.initializeApp(this);
         //Setting up toolbar
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
         Toast.makeText(this, "Firebase connected", Toast.LENGTH_SHORT).show();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open,R.string.drawer_close);
@@ -67,14 +68,14 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+       /* FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){//user is not authenticated need to send to loginActivity
             Toast.makeText(this, "help", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(this, "ughhh", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     private void SendUserToLoginActivity() {
