@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle("Home");
 
         mAuth = FirebaseAuth.getInstance();
-        Toast.makeText(this, "Firebase connected", Toast.LENGTH_SHORT).show();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open,R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -71,10 +70,7 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){//user is not authenticated need to send to loginActivity
-            Toast.makeText(this, "help", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "ughhh", Toast.LENGTH_SHORT).show();
+            SendUserToLoginActivity();
         }
     }
 
