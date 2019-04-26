@@ -23,7 +23,13 @@ public class LoginActivity extends AppCompatActivity {
         UserPassword = (EditText) findViewById(R.id.login_password);
         LoginButton = (Button) findViewById(R.id.login_button);
 
-
+        LoginButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                AttemptToLogin();
+            }
+        } );
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -32,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void AttemptToLogin() {
     }
 
     private void SendUserToRegisterActivity()
