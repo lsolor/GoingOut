@@ -43,6 +43,12 @@ public class LoginActivity extends AppCompatActivity {
     private void AttemptToLogin() {
     }
 
+    private void SendUserToMainActivity()
+    {
+        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(mainIntent);
+    }
+
     private void SendUserToRegisterActivity()
     {
         Intent registerIntent = new Intent(LoginActivity.this,RegisterActivity.class);
