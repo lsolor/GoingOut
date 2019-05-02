@@ -1,6 +1,6 @@
 package com.wildyeo.goingout;
 
-import android.app.ProgressDialog;
+//import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText UserEmail, UserPassword, UserConfirmPassword;
     private Button CreateAccountButton;
     private FirebaseAuth mAuth;
-    private ProgressDialog LoadingBar;
+    //private ProgressDialog LoadingBar;
 
 
     @Override
@@ -33,11 +33,14 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mAuth = FirebaseAuth.getInstance();
+        Toast.makeText(this, "made register", Toast.LENGTH_SHORT).show();
+
         UserEmail = (EditText) findViewById(R.id.register_email);
         UserPassword = (EditText) findViewById(R.id.register_password);
         UserConfirmPassword = (EditText) findViewById(R.id.register_confirm_password);
         CreateAccountButton = (Button) findViewById(R.id.register_create_account_button);
-        LoadingBar = new ProgressDialog(this);
+       // LoadingBar = new ProgressDialog(this);
 
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mAuth.getInstance();
 
         }
 
@@ -54,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
         String confirmPassword = UserConfirmPassword.getText().toString();
-
+        Toast.makeText(this,"making",Toast.LENGTH_SHORT);
         //check to see that user
         if(TextUtils.isEmpty(email)) {
 
@@ -81,9 +83,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
         else {
-            LoadingBar.setTitle("Creating new account");
-            LoadingBar.setMessage("Please wait while we are creating your new account.");
-            LoadingBar.show();
+            //LoadingBar.setTitle("Creating new account");
+            //LoadingBar.setMessage("Please wait while we are creating your new account.");
+            //LoadingBar.show();
+            //LoadingBar.setCanceledOnTouchOutside(true);
             mAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -91,10 +94,12 @@ public class RegisterActivity extends AppCompatActivity {
                             
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterActivity.this, "You are authenticated successfully", Toast.LENGTH_SHORT).show();
+                               // LoadingBar.dismiss();
                             }
                             else{
                                 String message = task.getException().getMessage();
                                 Toast.makeText(RegisterActivity.this, "Error occurred:" + message, Toast.LENGTH_SHORT).show();
+                               // LoadingBar.dismiss();
                             }
                         }
                     });

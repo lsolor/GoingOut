@@ -63,15 +63,12 @@
         android:id="@+id/setup_information_button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginLeft="160dp"
-        android:layout_marginBottom="74dp"
-        android:text="Save"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button"
         android:padding="24dp"
-        android:background="@drawable/button" />
+        android:text="Save" />
 
 
 </RelativeLayout>
