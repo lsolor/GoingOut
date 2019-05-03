@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -28,13 +29,16 @@ public class RegisterActivity extends AppCompatActivity {
     //private ProgressDialog LoadingBar;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        Toast.makeText(this, "made register", Toast.LENGTH_SHORT).show();
+
+        String RegisterTag = "Register Activity";
+        Log.v(RegisterTag, "Made it to Register Activity");
 
         UserEmail = (EditText) findViewById(R.id.register_email);
         UserPassword = (EditText) findViewById(R.id.register_password);
@@ -58,53 +62,61 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = UserConfirmPassword.getText().toString();
         Toast.makeText(this,"making",Toast.LENGTH_SHORT);
         //check to see that user
+        String CreateAccountTag = "Create Account";
+        Log.v(CreateAccountTag, "Inside of CreateNewAccount module");
         if(TextUtils.isEmpty(email)) {
 
 
             Toast.makeText(this,"Please enter your email...",Toast.LENGTH_SHORT);
-
+            Log.v(CreateAccountTag, "Empty Email");
         }
         else if(TextUtils.isEmpty(password)) {
 
 
             Toast.makeText(this,"Please enter your password...",Toast.LENGTH_SHORT);
-
+            Log.v(CreateAccountTag, "Empty password");
         }
         else if(TextUtils.isEmpty(confirmPassword)) {
 
 
             Toast.makeText(this,"Please confirm your password...",Toast.LENGTH_SHORT);
-
+            Log.v(CreateAccountTag, "Empty confirm password");
         }
 
         else if(!password.equals(confirmPassword)){
 
             Toast.makeText(this,"Your passwords do not match.",Toast.LENGTH_SHORT);
-
+            Log.v(CreateAccountTag, "Passwords don't match");
         }
         else {
             //LoadingBar.setTitle("Creating new account");
             //LoadingBar.setMessage("Please wait while we are creating your new account.");
             //LoadingBar.show();
             //LoadingBar.setCanceledOnTouchOutside(true);
+            Log.v(CreateAccountTag, "All credentials are valid");
             mAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            
+                            String CreateButtonTag = "Create Button";
+                            Log.v(CreateButtonTag, "trying to create account");
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterActivity.this, "You are authenticated successfully", Toast.LENGTH_SHORT).show();
                                // LoadingBar.dismiss();
+                                Log.v(CreateButtonTag, "successfully created an account");
                             }
                             else{
                                 String message = task.getException().getMessage();
                                 Toast.makeText(RegisterActivity.this, "Error occurred:" + message, Toast.LENGTH_SHORT).show();
                                // LoadingBar.dismiss();
+                                Log.v(CreateButtonTag, "successfully created an account");
                             }
+                            Log.v(CreateButtonTag, "end of trying to create account");
                         }
                     });
 
         }
+        Log.v(CreateAccountTag, "End of create account");
 
 
 
