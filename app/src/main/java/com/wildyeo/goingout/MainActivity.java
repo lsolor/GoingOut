@@ -9,11 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,28 +29,37 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
     private Toolbar mToolbar;
-
+    String FB = "Firebase";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.v(FB, "Set up layout");
 
-        //Setting up toolbar
-        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+
+        /* Initialize firebase app before trying to get auth */
+        FirebaseApp.initializeApp(this);
+        Log.v(FB, "Initialized App");
+
+        /* Setting up toolbar */
+        mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Home");
 
+        /* Get firebase user */
         mAuth = FirebaseAuth.getInstance();
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
+        Log.v(FB, "Get instance of auth");
+
+        drawerLayout = findViewById(R.id.drawable_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.drawer_open,R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         View navView = navigationView.inflateHeaderView(R.layout.navigation_header); //add in header with profile pic
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
