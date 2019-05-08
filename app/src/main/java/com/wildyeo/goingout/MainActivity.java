@@ -18,6 +18,11 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity
@@ -29,7 +34,9 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private RecyclerView postList;
     private Toolbar mToolbar;
+    private DatabaseReference UserRef;
     String FB = "Firebase";
+    String SU = "Setup";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +50,7 @@ public class MainActivity extends AppCompatActivity
         FirebaseApp.initializeApp(this);
         Log.v(FB, "Initialized App");
 
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         /* Setting up toolbar */
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
@@ -83,6 +91,39 @@ public class MainActivity extends AppCompatActivity
         if(currentUser == null){//user is not authenticated need to send to loginActivity
             SendUserToLoginActivity();
         }
+        else{
+            CheckUserExistence();
+            Log.v(SU,"Checking existence");
+        }
+    }
+
+    private void CheckUserExistence() {
+        final String current_user_id = mAuth.getCurrentUser().getUid();
+        Log.v(SU,"Inside checking existence");
+        UserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                /* User is authenticated but UID is not present in database... send to set up */
+                Log.v(SU,"Inside onDataChange Method");
+                if(!dataSnapshot.hasChild(current_user_id)){
+                    SendUserToSetUpActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void SendUserToSetUpActivity() {
+        Log.v(SU,"Sending user to SetUp Activity");
+        Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
     }
 
     private void SendUserToLoginActivity() {

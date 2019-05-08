@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,6 +55,20 @@ public class LoginActivity extends AppCompatActivity {
                 SendUserToRegisterActivity();
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        /* if user is already login, then send to main activity*/
+        if(currentUser != null){//user is not authenticated need to send to loginActivity
+            SendUserToMainActivity();
+        }
+
 
     }
 
