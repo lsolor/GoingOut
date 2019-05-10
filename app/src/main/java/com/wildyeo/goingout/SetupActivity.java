@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class SetupActivity extends AppCompatActivity {
     private DatabaseReference UsersRef;
     private String currentUserID;
     //private ProgressDialog LoadingBar;
+    String Tag = "SU";
 
 
     @Override
@@ -58,13 +60,14 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SaveAccountSetupInformation();
+
             }
         });
 
     }
 
     private void SaveAccountSetupInformation() {
-
+        Log.v(Tag, "In SaveAccountSetUp");
         String username = Username.getText().toString();
         String fullname = FullName.getText().toString();
         String country = CountryName.getText().toString();
@@ -79,6 +82,7 @@ public class SetupActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write your country", Toast.LENGTH_SHORT).show();
         }
         else{
+            Log.v(Tag, "Creating hashmap");
             /*LoadingBar.setTitle("Saving information");
             LoadingBar.setMessage("Please wait while we are creating your new account.");
             LoadingBar.show();
@@ -94,16 +98,19 @@ public class SetupActivity extends AppCompatActivity {
             UsersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
+                    Log.v(Tag, "Updating children");
                     if(task.isSuccessful()){
 
                         SendUserToMainActivty();
                         Toast.makeText(SetupActivity.this, "Your account has been successfully created",Toast.LENGTH_LONG);
                         //LoadingBar.dismiss();
+                        Log.v(Tag, "Task was successful");
                     }
                     else{
                         String message = task.getException().getMessage();
                         Toast.makeText(SetupActivity.this,"Error Occurred: " + message, Toast.LENGTH_LONG);
                        // LoadingBar.dismiss();
+                        Log.v(Tag, "Task was unsuccessful:"+message);
                     }
 
                 }
@@ -117,7 +124,7 @@ public class SetupActivity extends AppCompatActivity {
 
     private void SendUserToMainActivty() {
         Intent setupIntent = new Intent(SetupActivity.this, MainActivity.class);
-
+        Log.v(Tag, "Sending to main activity");
         /* add flags so that user cannot press back button without first hitting logout button */
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(setupIntent);
