@@ -69,6 +69,15 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private void SendUsertoSetUpActivity() {
+        Intent setupIntent = new Intent(RegisterActivity.this, SetupActivity.class);
+
+        /* add flags so that user cannot press back button without first hitting logout button */
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
+    }
+
     private void SendUserToMainActivity()
     {
         Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
@@ -126,6 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterActivity.this, "You are authenticated successfully", Toast.LENGTH_SHORT).show();
                                // LoadingBar.dismiss();
+                                SendUsertoSetUpActivity();
                                 Log.v(CreateButtonTag, "successfully created an account");
                             }
                             else{
@@ -143,9 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-
-
-
-
     }
+
+
 }

@@ -35,7 +35,7 @@ public class SetupActivity extends AppCompatActivity {
     private String currentUserID;
     //private ProgressDialog LoadingBar;
     String Tag = "SU";
-
+    final static int galleryPic = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,18 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SaveAccountSetupInformation();
+            }
+        });
 
+        ProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+                /* Only getting images */
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, galleryPic);
             }
         });
 
