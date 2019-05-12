@@ -105,8 +105,8 @@ public class LoginActivity extends AppCompatActivity {
     {
         Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
 
-        /* add flags so that user cannot press back button without first hitting logout button */
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        /* add flags so that user cannot press back button without first hitting logout button
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
         startActivity(mainIntent);
         finish();
     }

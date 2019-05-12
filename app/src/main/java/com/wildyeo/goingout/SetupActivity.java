@@ -14,18 +14,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,6 +42,8 @@ public class SetupActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef;
     private String currentUserID;
+    private FirebaseStorage storageRef;
+    private StorageReference UserProfileImageRef;
     //private ProgressDialog LoadingBar;
     String Tag = "SU";
     final static int galleryPic = 1;
@@ -50,7 +57,10 @@ public class SetupActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         /*get user id */
         currentUserID = mAuth.getCurrentUser().getUid();
+        /* get reference to cloud bucket */
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
+        UserProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+
 
         Username = (EditText) findViewById(R.id.setup_username);
         FullName = (EditText) findViewById(R.id.setup_fullname);
@@ -87,6 +97,7 @@ public class SetupActivity extends AppCompatActivity {
 
         if(requestCode==galleryPic && resultCode==RESULT_OK && data != null)
         {
+
             Uri ImageUri = data.getData();
             /* show activity of imported Android Image Cropper */
             CropImage.activity()
@@ -98,10 +109,51 @@ public class SetupActivity extends AppCompatActivity {
         if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
         {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
+            /* Image Cropper is opened successfully */
             if(requestCode == RESULT_OK)
             {
-                Uri ResultUri = data.getData();
+                Uri resultUri = result.getUri();
+
+                /* setting reference to profile picture*/
+                StorageReference filePath = UserProfileImageRef.child(currentUserID + ".jpg");
+
+                /* put cropped image into storage */
+                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(SetupActivity.this,"Your profile image is stored successfully to Firebase Storage", Toast.LENGTH_SHORT);
+
+                            final String downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
+
+                            /*set profile's profile image */
+                            UsersRef.child("profileimage").setValue(downloadUrl)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task)
+                                {
+                                    if(task.isSuccessful()){
+
+                                        Toast.makeText(SetupActivity.this, "Profile image set to profile", Toast.LENGTH_SHORT).show();
+                                        
+                                    }
+                                    else{
+                                        String message = task.getException().getMessage();
+                                        Toast.makeText(SetupActivity.this, "Error Occurred: " + message, Toast.LENGTH_LONG);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+
+            }
+
+            else{
+                Toast.makeText(SetupActivity.this, "Error Occurred: Image could not be cropped. Please, try again.", Toast.LENGTH_LONG);
+
             }
         }
     }
